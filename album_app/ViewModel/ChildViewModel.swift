@@ -10,9 +10,9 @@ import Foundation
 class ChildViewModel: Identifiable {
     var id: UUID
     var name: String
-    var birthDate: String
+    var birthDate: Date
     
-    init(id: UUID, name: String, birthDate: String) {
+    init(id: UUID, name: String, birthDate: Date) {
         self.id = id
         self.name = name
         self.birthDate = birthDate

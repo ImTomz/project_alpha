@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct ChildCellView: View {
+    var dateFormatter: DateFormatter {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            return formatter
+        }
     
     @State var name = ""
-    @State var birthDate = ""
+    var birthDate: Date
     
     var body: some View {
         HStack {
             
             VStack {
                 Text(self.name).font(.custom("Bradley Hand Bold", size: 45))
-                Text(self.birthDate)
+                Text("\(self.birthDate,formatter: dateFormatter)")
                 Spacer().frame(height:10)
                 ZStack {
                     
@@ -38,8 +43,8 @@ struct ChildCellView: View {
     }
 }
 
-struct ChildCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChildCellView()
-    }
-}
+//struct ChildCellView_Previews: PreviewProvider {
+//    static var previews: some View {
+////        ChildCellView()
+//    }
+//}

@@ -11,7 +11,7 @@ struct AddButtonView: View {
     
     
     @State private var newChildName = ""
-    @State private var birthDate = ""
+    @State private var birthDate = Date()
     
     
     var body: some View {
@@ -22,9 +22,10 @@ struct AddButtonView: View {
                     .padding()
             }
             HStack {
-                TextField("New child birth date", text: self.$birthDate)
-                    .background(Color.init("BackgroundColor"))
-                    .padding()
+                DatePicker(selection: $birthDate, displayedComponents: .date) {
+                    Text("Select a date")
+                }.labelsHidden()
+                .accentColor(.gray)
             }
             
             Button(action: {
@@ -33,7 +34,6 @@ struct AddButtonView: View {
                 vm.addChild(childVM: ChildViewModel(id: UUID(), name: self.newChildName, birthDate: self.birthDate))
                 
                 self.newChildName = ""
-                self.birthDate = ""
                 
             }, label: {
                 Text("Add")
@@ -46,8 +46,8 @@ struct AddButtonView: View {
     }
 }
 
-struct AddButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddButtonView()
-    }
-}
+//struct AddButtonView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddButtonView()
+//    }
+//}

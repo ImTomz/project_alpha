@@ -19,7 +19,7 @@ struct AlbumsView: View {
             ScrollView {
                 
                 LazyVStack {
-                    ForEach(0..<14,id: \.self) {num in
+                    ForEach(0..<3,id: \.self) {num in
                         Text("12.04.2020")
                         ScrollView(.horizontal){
                             LazyHStack {

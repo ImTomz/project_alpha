@@ -11,6 +11,7 @@ import CoreData
 public class Child:NSManagedObject {
     
     @NSManaged public var name: String?
-    @NSManaged public var birthDate: String?
+    @NSManaged public var birthDate: Date?
     @NSManaged public var id: UUID?
+    
 }

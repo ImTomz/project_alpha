@@ -56,7 +56,9 @@ struct HomeView: View {
                                         
                     Spacer().frame(height: 10)
                     
-                        List {
+                    ScrollView {
+                        
+                        LazyVStack {
                             ForEach(viewModel.childs){ child in
                                 NavigationLink(destination: AlbumsView(childName: child.name)) {
                                     ChildCellView(name: child.name,birthDate: child.birthDate)
@@ -67,12 +69,10 @@ struct HomeView: View {
                                 }, label: {
                                     Text("Delete")
                                 }
-                                )}
-
+                                )}.accentColor(Color.init(.black))
 
                         }.padding([.top,.bottom], 20)
-                        .background(Color.init("BackgroundColor"))
-                        
+                    }
                     
                 }
                 
