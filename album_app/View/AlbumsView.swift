@@ -10,6 +10,7 @@ import SwiftUI
 struct AlbumsView: View {
     @State private var isAddMenuPresented = false
     public var childName: String
+    var screenWidth = UIScreen.main.bounds.width
     
     var body: some View {
         ZStack {
@@ -18,28 +19,21 @@ struct AlbumsView: View {
                 .navigationBarItems(trailing: AlbumsTrailingButton(isAddMenuPresented: $isAddMenuPresented))
             ScrollView {
                 
-                LazyVStack {
-                    ForEach(0..<3,id: \.self) {num in
-                        Text("12.04.2020")
-                        ScrollView(.horizontal){
-                            LazyHStack {
-                              
-                                    ForEach(0..<5,id: \.self){ pic in
-                                        
-                                            Image(systemName: "person")
-                                                .resizable()
-                                                .frame(width: 100,
-                                                       height: 100,
-                                                       alignment: .center)
-                                                .background(Color.init(.gray))
-                                                                                    
-                                    }
-                            }                        
-                        }
-                        .padding(.leading,35)
-                        
-                    }.background(Color.init("BackgroundColor"))
-                }.padding([.leading,.trailing],-20)
+                LazyVGrid(columns: [GridItem(.flexible(minimum: screenWidth/3, maximum: screenWidth/3),spacing: 1),
+                                    GridItem(.flexible(minimum: screenWidth/3, maximum: screenWidth/3),spacing: 1),
+                                    GridItem(.flexible(minimum: screenWidth/3, maximum: screenWidth/3))],spacing: 1
+                            , content: {
+                    ForEach(0..<20, id: \.self){ num in
+                        Image(systemName: "person")
+                            .resizable()
+                            .frame(width: screenWidth/3,
+                                   height: screenWidth/3,
+                                   alignment: .center)
+                            .background(Color.init(.gray))
+                    }
+                    
+                })
+                
             }
         }
     }
