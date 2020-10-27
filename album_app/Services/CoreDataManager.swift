@@ -66,4 +66,41 @@ final class CoreDataManager {
         }
     }
     
+    func getParent() -> [ParentModel] {
+        var parent = [ParentModel]()
+        let parentRequest: NSFetchRequest<ParentModel> = ParentModel.fetchRequest() as! NSFetchRequest<ParentModel>
+    
+        do {
+            parent = try self.managedContext.fetch(parentRequest)
+            print(parent)
+        }catch {
+            print(error)
+        }
+    
+        return parent
+    }
+    
+    func editParent(name: String) {
+        let parentRequest: NSFetchRequest<ParentModel> = ParentModel.fetchRequest() as! NSFetchRequest<ParentModel>
+        
+        do {
+            let parent = try self.managedContext.fetch(parentRequest)[0]
+            parent.name = name
+            try self.managedContext.save()
+        }catch{
+            print(error)
+        }
+    }
+    
+    func addParent(name: String) {
+        let parent = ParentModel(context: NSManagedObjectContext.current)
+        parent.name = name
+        
+        do{
+            try self.managedContext.save()
+        }catch {
+            print(error)
+        }
+    }
+    
 }

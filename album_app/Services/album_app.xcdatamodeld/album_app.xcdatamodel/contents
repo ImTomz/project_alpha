@@ -5,7 +5,11 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="ParentModel" representedClassName=".ParentModel" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Child" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="ParentModel" positionX="-290.59765625" positionY="-16.16015625" width="128" height="58"/>
     </elements>
 </model>

@@ -15,13 +15,14 @@ struct HomeView: View {
     @State var inputImage: UIImage?
     
     @ObservedObject var viewModel = ChildsTableViewModel()
+    @ObservedObject var parentViewModel = ParentShowViewModel()
     
     var body: some View {
         NavigationView {
             ZStack{
                 Color.init("BackgroundColor")
                     .ignoresSafeArea(.all)
-                    .navigationBarItems(leading: HomeLeadingButton(isSettingsPresented: $isSettingsPresented),
+                    .navigationBarItems(leading: HomeLeadingButton(isSettingsPresented: $isSettingsPresented,model: parentViewModel),
                                         trailing: HomeTrailingButton(isAddMenuPresented: $isAddMenuPresented,model: viewModel))
                     
                 VStack {
@@ -47,7 +48,7 @@ struct HomeView: View {
                                 }
                         }
                         
-                        Text("Tomas Boda")
+                        Text("\(parentViewModel.parent[0].name)")
                             .font(.custom("Bradley Hand Bold", size: 38))
                         Text("Parent")
                     }
@@ -112,6 +113,7 @@ struct HomeTrailingButton: View {
 // MARK: -Navigation leading button
 struct HomeLeadingButton: View {
     @Binding var isSettingsPresented: Bool
+    var model: ParentShowViewModel
     
     var body: some View {
         Button(action: {self.isSettingsPresented.toggle()}) {
@@ -120,7 +122,7 @@ struct HomeLeadingButton: View {
                 .frame(width: 35, height: 35, alignment: .center)
                 .accentColor(.gray)
                 .padding(.leading, 20)
-        }.sheet(isPresented: $isSettingsPresented){SettingsView()}
+        }.sheet(isPresented: $isSettingsPresented,onDismiss: {model.fetchAll()}){SettingsView()}
     }
 }
 

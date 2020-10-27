@@ -8,26 +8,20 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
-
+    
     @State private var parentName: String = ""
+    @ObservedObject var parentViewModel = ParentShowViewModel()
     
     var body: some View {
         VStack {
             Text("Settings").font(.title)
-            TextField("New child birth date", text: self.$parentName)
+            TextField("Parent Name", text: self.$parentName)
                 .background(Color.init("BackgroundColor"))
                 .padding()
             Button(action: {
-            
-                    let parent = ParentModel(context: managedObjectContext)
-                    parent.parentName = self.parentName
+                
+                parentViewModel.editParent(parent: ParentViewModel(name: self.parentName))
                     
-                    do {
-                        try self.managedObjectContext.save()
-                    }catch{
-                        print(error)
-                    }
             }, label: {
                 Text("Save")
             })

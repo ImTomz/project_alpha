@@ -10,6 +10,5 @@ import CoreData
 
 public class ParentModel: NSManagedObject {
     
-    @NSManaged public var parentName: String?
-    
+    @NSManaged public var name: String?
 }

@@ -18,6 +18,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+        //Check for first launch if it is first launch creating parent
+        let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+        if launchedBefore  {
+            print("Not first launch.")
+        }
+        else {
+            print("First launch, setting NSUserDefault.")
+            UserDefaults.standard.set(true, forKey: "launchedBefore")
+            let vm = AddParentViewModel()
+            vm.addParent(parentVM: ParentViewModel(name: "Parent Name"))
+        }
+        
         // Get the managed object context from the shared persistent container.
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
