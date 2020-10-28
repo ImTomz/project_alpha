@@ -16,6 +16,7 @@ struct ChildCellView: View {
     
     @State var name = ""
     var birthDate: Date
+    var imageData: Data
     
     var body: some View {
         HStack {
@@ -26,7 +27,7 @@ struct ChildCellView: View {
                 Spacer().frame(height:10)
                 ZStack {
                     
-                    Image(systemName: "person")
+                    Image(uiImage: UIImage(data: imageData)!)
                         .resizable()
                         .scaledToFit()
                         .background(Color.init("BackgroundColor"))

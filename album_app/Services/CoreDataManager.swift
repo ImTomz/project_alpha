@@ -39,11 +39,12 @@ final class CoreDataManager {
     }
     
     //Add child
-    func addChild(id: UUID, name: String, birthDate: Date) {
+    func addChild(id: UUID, name: String, birthDate: Date,image: Data) {
         let child = Child(context: self.managedContext)
         child.name = name
         child.birthDate = birthDate
         child.id = id
+        child.image = image
         
         do{
             try self.managedContext.save()
@@ -66,6 +67,7 @@ final class CoreDataManager {
         }
     }
     
+    //Get parent
     func getParent() -> [ParentModel] {
         var parent = [ParentModel]()
         let parentRequest: NSFetchRequest<ParentModel> = ParentModel.fetchRequest() as! NSFetchRequest<ParentModel>
@@ -80,6 +82,7 @@ final class CoreDataManager {
         return parent
     }
     
+    //Edit parent
     func editParent(name: String,image: Data) {
         let parentRequest: NSFetchRequest<ParentModel> = ParentModel.fetchRequest() as! NSFetchRequest<ParentModel>
         
@@ -93,6 +96,7 @@ final class CoreDataManager {
         }
     }
     
+    //Add parent
     func addParent(name: String, image: Data) {
         let parent = ParentModel(context: NSManagedObjectContext.current)
         parent.name = name

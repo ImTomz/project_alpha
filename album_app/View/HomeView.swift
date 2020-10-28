@@ -45,7 +45,7 @@ struct HomeView: View {
                         LazyVStack {
                             ForEach(viewModel.childs){ child in
                                 NavigationLink(destination: AlbumsView(childName: child.name)) {
-                                    ChildCellView(name: child.name,birthDate: child.birthDate)
+                                    ChildCellView(name: child.name,birthDate: child.birthDate,imageData: (UIImage(data: child.image)?.pngData())!)
                                 }
                                 Button(action: {
                                     CoreDataManager.shared.removeChild(id: child.id)

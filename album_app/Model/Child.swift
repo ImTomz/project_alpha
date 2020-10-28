@@ -13,5 +13,6 @@ public class Child:NSManagedObject {
     @NSManaged public var name: String?
     @NSManaged public var birthDate: Date?
     @NSManaged public var id: UUID?
+    @NSManaged public var image: Data?
     
 }

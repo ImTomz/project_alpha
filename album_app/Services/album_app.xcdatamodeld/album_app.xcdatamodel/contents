@@ -3,6 +3,7 @@
     <entity name="Child" representedClassName=".Child" syncable="YES">
         <attribute name="birthDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="ParentModel" representedClassName=".ParentModel" syncable="YES">
@@ -10,7 +11,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Child" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="Child" positionX="-63" positionY="-18" width="128" height="103"/>
         <element name="ParentModel" positionX="-290.59765625" positionY="-16.16015625" width="128" height="73"/>
     </elements>
 </model>

@@ -9,6 +9,6 @@ import Foundation
 
 class AddChildViewModel {
     func addChild(childVM: ChildViewModel) {
-        CoreDataManager.shared.addChild(id: childVM.id, name: childVM.name, birthDate: childVM.birthDate)
+        CoreDataManager.shared.addChild(id: childVM.id, name: childVM.name, birthDate: childVM.birthDate, image: childVM.image)
     }
 }
