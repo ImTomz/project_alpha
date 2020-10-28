@@ -10,9 +10,6 @@ import SwiftUI
 struct HomeView: View {
     @State var isSettingsPresented = false
     @State var isAddMenuPresented = false
-    @State var image: Image?
-    @State var imagePickerPresented = false
-    @State var inputImage: UIImage?
     
     @ObservedObject var viewModel = ChildsTableViewModel()
     @ObservedObject var parentViewModel = ParentShowViewModel()
@@ -27,26 +24,12 @@ struct HomeView: View {
                     
                 VStack {
                     VStack {
-                        if image != nil {
-                            image?.resizable()
-                                .frame(width: 100, height: 100)
-                                .background(Color.init(.white))
-                                .clipShape(Circle())
-                                .scaledToFit()
-                                .onTapGesture {
-                                    self.imagePickerPresented = true
-                                }
-                        }else {
-                            Image(systemName: "person")
+                        Image(uiImage: UIImage(data: parentViewModel.parent[0].image)!)
                                 .resizable()
                                 .frame(width: 100, height: 100)
                                 .background(Color.init(.white))
                                 .clipShape(Circle())
-                                .scaledToFit()
-                                .onTapGesture {
-                                    self.imagePickerPresented = true
-                                }
-                        }
+                                .scaledToFit()                        
                         
                         Text("\(parentViewModel.parent[0].name)")
                             .font(.custom("Bradley Hand Bold", size: 38))
@@ -78,15 +61,7 @@ struct HomeView: View {
                 }
                 
             }
-
-        }.sheet(isPresented: $imagePickerPresented, onDismiss: loadImage) {
-            ImagePicker(image: self.$inputImage)
         }
-    }
-    
-    func loadImage() {
-        guard let inputImage = inputImage else {return}
-        image = Image(uiImage: inputImage)
     }
 }
 
@@ -104,9 +79,9 @@ struct HomeTrailingButton: View {
                 .frame(width: 25, height: 25, alignment: .center)
                 .accentColor(.gray)
                 .padding(.trailing, 20)
-        }.sheet(isPresented: $isAddMenuPresented,onDismiss: {
+        }.fullScreenCover(isPresented: $isAddMenuPresented,onDismiss: {
             model.fetchAll()
-        }){AddButtonView()}
+        }){AddButtonView(showView: $isAddMenuPresented)}
     }
 }
 
@@ -122,7 +97,9 @@ struct HomeLeadingButton: View {
                 .frame(width: 35, height: 35, alignment: .center)
                 .accentColor(.gray)
                 .padding(.leading, 20)
-        }.sheet(isPresented: $isSettingsPresented,onDismiss: {model.fetchAll()}){SettingsView()}
+        }.fullScreenCover(isPresented: $isSettingsPresented,onDismiss: {
+                    model.fetchAll()
+        }){SettingsView(showView: $isSettingsPresented)}
     }
 }
 

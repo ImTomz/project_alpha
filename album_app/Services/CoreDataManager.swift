@@ -80,21 +80,23 @@ final class CoreDataManager {
         return parent
     }
     
-    func editParent(name: String) {
+    func editParent(name: String,image: Data) {
         let parentRequest: NSFetchRequest<ParentModel> = ParentModel.fetchRequest() as! NSFetchRequest<ParentModel>
         
         do {
             let parent = try self.managedContext.fetch(parentRequest)[0]
             parent.name = name
+            parent.image = image
             try self.managedContext.save()
         }catch{
             print(error)
         }
     }
     
-    func addParent(name: String) {
+    func addParent(name: String, image: Data) {
         let parent = ParentModel(context: NSManagedObjectContext.current)
         parent.name = name
+        parent.image = image
         
         do{
             try self.managedContext.save()

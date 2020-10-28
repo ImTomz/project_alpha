@@ -10,12 +10,15 @@ import Foundation
 class ParentViewModel: Identifiable {
     
     var name: String
+    var image: Data
     
-    init(name: String) {
+    init(name: String,image: Data) {
         self.name = name
+        self.image = image
     }
     
     init(parent: ParentModel) {
         self.name = parent.name!
+        self.image = parent.image!
     }
 }

@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("First launch, setting NSUserDefault.")
             UserDefaults.standard.set(true, forKey: "launchedBefore")
             let vm = AddParentViewModel()
-            vm.addParent(parentVM: ParentViewModel(name: "Parent Name"))
+            vm.addParent(parentVM: ParentViewModel(name: "Parent Name", image: UIImage(systemName: "person")!.pngData()!))
         }
         
         // Get the managed object context from the shared persistent container.

@@ -20,7 +20,7 @@ class ParentShowViewModel: ObservableObject{
     }
     
     func editParent(parent: ParentViewModel) {
-        CoreDataManager.shared.editParent(name: parent.name)
+        CoreDataManager.shared.editParent(name: parent.name,image: parent.image)
         fetchAll()
     }
 }

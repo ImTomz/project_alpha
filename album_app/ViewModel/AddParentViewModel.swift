@@ -9,6 +9,6 @@ import Foundation
 
 class AddParentViewModel {
     func addParent(parentVM: ParentViewModel) {
-        CoreDataManager.shared.addParent(name: parentVM.name)
+        CoreDataManager.shared.addParent(name: parentVM.name, image: parentVM.image)
     }
 }

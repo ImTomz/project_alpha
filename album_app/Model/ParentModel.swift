@@ -11,4 +11,5 @@ import CoreData
 public class ParentModel: NSManagedObject {
     
     @NSManaged public var name: String?
+    @NSManaged public var image: Data?
 }

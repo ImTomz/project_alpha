@@ -9,29 +9,86 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @Binding var showView: Bool
+    
     @State private var parentName: String = ""
+    @State var image: Image?
+    @State var imagePickerPresented = false
+    @State var inputImage: UIImage?
+    
     @ObservedObject var parentViewModel = ParentShowViewModel()
     
     var body: some View {
         VStack {
+            
             Text("Settings").font(.title)
-            TextField("Parent Name", text: self.$parentName)
+            if image != nil {
+                image?.resizable()
+                    .frame(width: 100, height: 100)
+                    .background(Color.init(.white))
+                    .clipShape(Circle())
+                    .scaledToFit()
+                    .onTapGesture {
+                        self.imagePickerPresented = true
+                    }
+            }else {
+                Image(systemName: "person")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .background(Color.init(.white))
+                    .clipShape(Circle())
+                    .scaledToFit()
+                    .onTapGesture {
+                        self.imagePickerPresented = true
+                    }
+            }
+            
+            TextField("\(parentViewModel.parent[0].name)", text: self.$parentName)
                 .background(Color.init("BackgroundColor"))
                 .padding()
-            Button(action: {
-                
-                parentViewModel.editParent(parent: ParentViewModel(name: self.parentName))
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            HStack {
+                Button(action: {
                     
-            }, label: {
-                Text("Save")
-            })
-        }
+                    if inputImage != nil {
+                        parentViewModel.editParent(parent: ParentViewModel(name: self.parentName,image: (self.inputImage)!.pngData()!))
+                        self.showView = false
+                    }
+                    parentViewModel.editParent(parent: ParentViewModel(name: self.parentName,image: parentViewModel.parent[0].image))
+                    self.showView = false
+                    
+                    
+                }, label: {
+                    Text("Save")
+                })
+                Button {
+                    self.showView = false
+                } label: {
+                    Text("Cancel")
+                }
+
+            }
+           
+        }.sheet(isPresented: $imagePickerPresented, onDismiss: loadImage) {
+            ImagePicker(image: self.$inputImage)
+        }.onAppear(
+            perform: {
+                parentViewModel.fetchAll()
+                let uiImage = UIImage(data: parentViewModel.parent[0].image)!
+                image = Image(uiImage: uiImage)
+                parentName = parentViewModel.parent[0].name
+            }
+        )
        
+    }
+    func loadImage() {
+        guard let inputImage = inputImage else {return}
+        image = Image(uiImage: inputImage)
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView()
-    }
-}
+//struct SettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsView()
+//    }
+//}
