@@ -24,10 +24,11 @@ struct SettingsView: View {
             Text("Settings").font(.title)
             if image != nil {
                 image?.resizable()
+                    .scaledToFill()
                     .frame(width: 100, height: 100)
                     .background(Color.init(.white))
                     .clipShape(Circle())
-                    .scaledToFit()
+                    .clipped()
                     .onTapGesture {
                         self.imagePickerPresented = true
                     }
@@ -51,7 +52,7 @@ struct SettingsView: View {
                 Button(action: {
                     
                     if inputImage != nil {
-                        parentViewModel.editParent(parent: ParentViewModel(name: self.parentName,image: (self.inputImage)!.pngData()!))
+                        parentViewModel.editParent(parent: ParentViewModel(name: self.parentName,image: (self.inputImage)!.jpegData(compressionQuality: 0.9)!))
                         self.showView = false
                     }
                     parentViewModel.editParent(parent: ParentViewModel(name: self.parentName,image: parentViewModel.parent[0].image))

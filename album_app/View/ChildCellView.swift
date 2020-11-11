@@ -25,22 +25,17 @@ struct ChildCellView: View {
                 Text(self.name).font(.custom("Bradley Hand Bold", size: 45))
                 Text("\(self.birthDate,formatter: dateFormatter)")
                 Spacer().frame(height:10)
-                ZStack {
-                    
-                    Image(uiImage: UIImage(data: imageData)!)
-                        .resizable()
-                        .scaledToFit()
-                        .background(Color.init("BackgroundColor"))
-                    
-                }.frame(width: 300, height: 200, alignment: .center)
-                .background(Color.init("BackgroundColor"))
-                
+                Image(uiImage: UIImage(data: imageData)!)
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(width: 300, height: 200, alignment: .center)
+                                                        .clipped()
             }.padding(20)
 
         }.frame(width: 320, height: 320, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         .background(Color.init(.white))
         .cornerRadius(20)
-        .shadow(color: .gray, radius: 9, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: 5)
+        .shadow(color: .gray, radius: 9, x: 0, y: 5)
     }
 }
 

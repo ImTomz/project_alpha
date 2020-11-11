@@ -26,10 +26,11 @@ struct HomeView: View {
                     VStack {
                         Image(uiImage: UIImage(data: parentViewModel.parent[0].image)!)
                                 .resizable()
+                                .scaledToFill()
                                 .frame(width: 100, height: 100)
                                 .background(Color.init(.white))
                                 .clipShape(Circle())
-                                .scaledToFit()                        
+                                
                         
                         Text("\(parentViewModel.parent[0].name)")
                             .font(.custom("Bradley Hand Bold", size: 38))
@@ -48,8 +49,7 @@ struct HomeView: View {
                                     ChildCellView(name: child.name,birthDate: child.birthDate,imageData: (UIImage(data: child.image)?.pngData())!)
                                 }
                                 Button(action: {
-                                    CoreDataManager.shared.removeChild(id: child.id)
-                                    viewModel.fetchAll()
+                                    viewModel.removeChild(child: child)
                                 }, label: {
                                     Text("Delete")
                                 }

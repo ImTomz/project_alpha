@@ -39,7 +39,7 @@ final class CoreDataManager {
     }
     
     //Add child
-    func addChild(id: UUID, name: String, birthDate: Date,image: Data) {
+    func addChild(id: UUID, name: String, birthDate: Date, image: Data) {
         let child = Child(context: self.managedContext)
         child.name = name
         child.birthDate = birthDate
@@ -74,7 +74,6 @@ final class CoreDataManager {
     
         do {
             parent = try self.managedContext.fetch(parentRequest)
-            print(parent)
         }catch {
             print(error)
         }

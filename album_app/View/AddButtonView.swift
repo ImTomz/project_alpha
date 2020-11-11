@@ -20,9 +20,10 @@ struct AddButtonView: View {
     
     var body: some View {
         VStack{
+            Spacer()
             if image != nil {
                 image?.resizable()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 180, height: 150)
                     .background(Color.init(.white))
                     .scaledToFit()
                     .onTapGesture {
@@ -57,9 +58,6 @@ struct AddButtonView: View {
                         vm.addChild(childVM: ChildViewModel(id: UUID(), name: self.newChildName, birthDate: self.birthDate,image: (inputImage?.pngData() ?? UIImage(systemName: "person")?.pngData())!))
                         self.showView = false
                     }
-                    
-                   
-                    
                     
                 }, label: {
                     Text("Add")
